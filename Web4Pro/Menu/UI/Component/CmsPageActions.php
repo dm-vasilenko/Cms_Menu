@@ -46,7 +46,7 @@ class CmsPageActions extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'cms_menu/index/edit',
+                        'cms_menu/index/editpage',
                         ['id' => $item['link_id'], 'store' => $storeId]
                     ),
                     'label' => __('Edit'),

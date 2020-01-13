@@ -5,21 +5,19 @@
             <item name="provider" xsi:type="string">edit_link_form.edit_link_form_data_source</item>
             <item name="deps" xsi:type="string">edit_link_form.edit_link_form_data_source</item>
         </item>
-        <item name="label" xsi:type="string" translate="true">Edit Link Form</item>
-        <item name="layout" xsi:type="array">
-            <item name="type" xsi:type="string">tabs</item>
+        <item name="label" xsi:type="string" translate="true">Link Form</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">link_form</item>
         </item>
-
-<!--        <item name="buttons" xsi:type="array">-->
-<!--            <item name="back" xsi:type="string">Pfay\Contacts\Block\Adminhtml\Contact\Edit\BackButton</item>-->
-<!--            <item name="delete" xsi:type="string">Pfay\Contacts\Block\Adminhtml\Contact\Edit\DeleteButton</item>-->
-<!--            <item name="reset" xsi:type="string">Pfay\Contacts\Block\Adminhtml\Contact\Edit\ResetButton</item>-->
-<!--            <item name="save" xsi:type="string">Pfay\Contacts\Block\Adminhtml\Contact\Edit\SaveButton</item>-->
-<!--        </item>-->
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
         <buttons>
+            <button name="back" class="Web4Pro\Menu\Block\Adminhtml\BackButton"/>
             <button name="save" class="Web4Pro\Menu\Block\Adminhtml\SaveLink"/>
+            <button name="reset" class="Web4Pro\Menu\Block\Adminhtml\ResetButton"/>
+            <button name="delete" class="Web4Pro\Menu\Block\Adminhtml\DeleteButton"/>
         </buttons>
         <namespace>link_form</namespace>
         <dataScope>data</dataScope>
@@ -29,22 +27,25 @@
     </settings>
     <dataSource name="edit_link_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="class" xsi:type="string">Web4Pro\Menu\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">edit_link_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">link_id</argument>
-            <argument name="requestFieldName" xsi:type="string">link_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
         </argument>
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
         </argument>
+        <settings>
+            <submitUrl path="cms_menu/index/editsave" />
+        </settings>
     </dataSource>
 
     <fieldset name="general">
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
-                <item name="label" xsi:type="string" translate="true">Edit link</item>
+                <item name="label" xsi:type="string" translate="true">General</item>
             </item>
         </argument>
 
@@ -76,7 +77,7 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Cms Pages</item>
                     <item name="formElement" xsi:type="string">select</item>
-                    <item name="source" xsi:type="string">sliders</item>
+                    <item name="source" xsi:type="string">link</item>
                     <item name="sortOrder" xsi:type="number">5</item>
                     <item name="dataScope" xsi:type="string">cms_page_link</item>
                 </item>
@@ -108,6 +109,17 @@
                     </settings>
                 </select>
             </formElements>
+        </field>
+
+        <field name="link_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">link</item>
+                </item>
+            </argument>
         </field>
 
     </fieldset>

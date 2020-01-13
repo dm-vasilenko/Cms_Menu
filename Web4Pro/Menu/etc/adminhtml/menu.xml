@@ -12,7 +12,7 @@
                 dependsOnModule="Web4Pro_Menu"
                 resource="Web4Pro_Menu::cms_menu"
                 parent="Magento_Backend::content_elements"
-                action="cms_menu/index/listing"
+                action="cms_menu/index/listingpage"
         />
     </menu>
 </config>
