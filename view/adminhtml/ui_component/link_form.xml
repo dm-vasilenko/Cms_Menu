@@ -39,7 +39,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="cms_menu/index/save" />
+            <submitUrl path="link/index/save" />
         </settings>
     </dataSource>
 
@@ -125,24 +125,23 @@
                                 <item name="label" xsi:type="string">No</item>
                             </option>
                         </options>
-                        <caption translate="true">-- Please Select --</caption>
                     </settings>
                 </select>
             </formElements>
         </field>
     </fieldset>
 
-    <fieldset name="assign_products" sortOrder="40">
+    <fieldset name="page_grid" sortOrder="40">
         <settings>
             <collapsible>true</collapsible>
             <label translate="true">Cms Pages</label>
             <additionalClasses>
-                <class name="product-video-grid">true</class>
+                <class name="pages">true</class>
             </additionalClasses>
         </settings>
-        <container name="my_container" sortOrder="160">
+        <container name="grid_container" sortOrder="160">
             <htmlContent name="html_content">
-                <block name="cms.menu.container" class="Web4Pro\Menu\Block\Adminhtml\Example\Edit\Page"/>
+                <block name="page_grid" class="Web4Pro\Menu\Block\Adminhtml\Example\Edit\Page"/>
             </htmlContent>
         </container>
     </fieldset>

@@ -6,19 +6,19 @@ use Magento\Framework\Registry;
 
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
-    protected $_coreRegistry = null;
+    protected $coreRegistry = null;
 
-    protected $_productFactory;
+    protected $pageFactory;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
-        \Magento\Cms\Model\PageFactory $productFactory,
+        \Magento\Cms\Model\PageFactory $pageFactory,
         Registry $coreRegistry,
         array $data = []
     ) {
-        $this->_productFactory = $productFactory;
-        $this->_coreRegistry = $coreRegistry;
+        $this->pageFactory = $pageFactory;
+        $this->coreRegistry = $coreRegistry;
         parent::__construct($context, $backendHelper, $data);
     }
 
@@ -28,21 +28,21 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->setId('page_grid');
         $this->setDefaultSort('page_id');
         $this->setUseAjax(true);
+        $this->setSaveParametersInSession(true);
     }
 
     protected function _addColumnFilterToCollection($column)
     {
-        // Set custom filter for in product flag
         if ($column->getId() == 'page_id') {
-            $productIds = $this->_getSelectedProducts();
-            if (empty($productIds)) {
-                $productIds = 0;
+            $pageIds = $this->_getSelectedPages();
+            if (empty($pageIds)) {
+                $pageIds = 0;
             }
             if ($column->getFilter()->getValue()) {
-                $this->getCollection()->addFieldToFilter('page_id', ['in' => $productIds]);
+                $this->getCollection()->addFieldToFilter('page_id', ['in' => $pageIds]);
             } else {
-                if ($productIds) {
-                    $this->getCollection()->addFieldToFilter('page_id', ['nin' => $productIds]);
+                if ($pageIds) {
+                    $this->getCollection()->addFieldToFilter('page_id', ['nin' => $pageIds]);
                 }
             }
         } else {
@@ -53,7 +53,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
     protected function _prepareCollection()
     {
-        $collection = $this->_productFactory->create()->getCollection()->addFieldToSelect(
+        $collection = $this->pageFactory->create()->getCollection()->addFieldToSelect(
             '*'
         );
         $this->setCollection($collection);
@@ -66,10 +66,13 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             'page_id',
             [
                 'type' => 'checkbox',
+                'editable'     => true,
+                'edit_only'    => false,
                 'html_name' => 'page_id',
-                'values' => $this->_getSelectedProducts(),
+                'values' => $this->_getSelectedPages(),
                 'align' => 'center',
                 'index' => 'page_id',
+                'field_name' =>'selected_pages',
                 'header_css_class' => 'col-select col-massaction',
                 'column_css_class' => 'col-select col-massaction'
             ]
@@ -101,14 +104,14 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getGridUrl()
     {
         return $this->getUrl(
-            'cms_menu/index/productgrid',
+            'link/index/grid',
             ['_current' => true]
         );
     }
 
-    protected function _getSelectedProducts()
+    protected function _getSelectedPages()
     {
-        $data = $this->getRequest()->getPost('selected_products');
+        $data = $this->getRequest()->getPost('selected_pages');
         return  $data;
     }
 

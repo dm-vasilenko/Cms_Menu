@@ -4,7 +4,7 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Web4Pro_Menu::cms_menu" title="Cms Menu(Web4Pro)" translate="title" sortOrder="1" />
+                <resource id="Web4Pro_Menu::link" title="Cms Menu(Web4Pro)" translate="title" sortOrder="1" />
             </resource>
         </resources>
     </acl>

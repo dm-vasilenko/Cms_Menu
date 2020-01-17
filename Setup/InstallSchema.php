@@ -5,9 +5,8 @@ namespace Web4Pro\Menu\Setup;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
-use Magento\Framework\DB\Adapter\AdapterInterface;
 
-use Web4Pro\Menu\Api\Model\Schema\CmsMenuSchemaInterface;
+use Web4Pro\Menu\Api\Model\Schema\LinksSchemaInterface;
 use Web4Pro\Menu\Api\Model\Schema\LinksAndCmsPageSchemaInterface;
 
 class InstallSchema implements InstallSchemaInterface
@@ -28,12 +27,12 @@ class InstallSchema implements InstallSchemaInterface
         $setup->getConnection()->addForeignKey(
             $setup->getFkName(
                 $setup->getTable(LinksAndCmsPageSchemaInterface::TABLE_NAME),
-                LinksAndCmsPageSchemaInterface::CMS_PAGE_COL_NAME,
+                LinksAndCmsPageSchemaInterface::PRIMARY_COL_NAME,
                 $setup->getTable(LinksAndCmsPageSchemaInterface::CMS_PAGE_TABLE_NAME),
                 LinksAndCmsPageSchemaInterface::CMS_PAGE_ORIG_COL_NAME
             ),
             $setup->getTable(LinksAndCmsPageSchemaInterface::TABLE_NAME),
-            LinksAndCmsPageSchemaInterface::CMS_PAGE_COL_NAME,
+            LinksAndCmsPageSchemaInterface::PRIMARY_COL_NAME,
             $setup->getTable(LinksAndCmsPageSchemaInterface::CMS_PAGE_TABLE_NAME),
             LinksAndCmsPageSchemaInterface::CMS_PAGE_ORIG_COL_NAME,
             \Magento\Framework\DB\Ddl\Table::ACTION_NO_ACTION
@@ -42,13 +41,13 @@ class InstallSchema implements InstallSchemaInterface
             $setup->getFkName(
                 $setup->getTable(LinksAndCmsPageSchemaInterface::TABLE_NAME),
                 LinksAndCmsPageSchemaInterface::LINK_ID_COL_NAME,
-                $setup->getTable(CmsMenuSchemaInterface::TABLE_NAME),
-                CmsMenuSchemaInterface::LINK_ID_COL_NAME
+                $setup->getTable(LinksSchemaInterface::TABLE_NAME),
+                LinksSchemaInterface::LINK_ID_COL_NAME
             ),
             $setup->getTable(LinksAndCmsPageSchemaInterface::TABLE_NAME),
             LinksAndCmsPageSchemaInterface::LINK_ID_COL_NAME,
-            $setup->getTable(CmsMenuSchemaInterface::TABLE_NAME),
-            CmsMenuSchemaInterface::LINK_ID_COL_NAME,
+            $setup->getTable(LinksSchemaInterface::TABLE_NAME),
+            LinksSchemaInterface::LINK_ID_COL_NAME,
             \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
         );
         $installer->endSetup();
@@ -56,12 +55,12 @@ class InstallSchema implements InstallSchemaInterface
 
     public function createLinkTable($installer)
     {
-        if (!$installer->tableExists(CmsMenuSchemaInterface::TABLE_NAME)) {
+        if (!$installer->tableExists(LinksSchemaInterface::TABLE_NAME)) {
             $table = $installer->getConnection()->newTable(
-                $installer->getTable(CmsMenuSchemaInterface::TABLE_NAME)
+                $installer->getTable(LinksSchemaInterface::TABLE_NAME)
             )
                 ->addColumn(
-                    CmsMenuSchemaInterface::LINK_ID_COL_NAME,
+                    LinksSchemaInterface::LINK_ID_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                     null,
                     [
@@ -72,7 +71,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Link ID'
                 )->addColumn(
-                    CmsMenuSchemaInterface::LINK_NAME_COL_NAME,
+                    LinksSchemaInterface::LINK_NAME_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     32,
                     [
@@ -80,7 +79,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Link name'
                 )->addColumn(
-                    CmsMenuSchemaInterface::LINK_BODY_COL_NAME,
+                    LinksSchemaInterface::LINK_BODY_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     32,
                     [
@@ -88,7 +87,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Link body'
                 )->addColumn(
-                    CmsMenuSchemaInterface::CMS_PAGE_LINK,
+                    LinksSchemaInterface::CMS_PAGE_NAME_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     120,
                     [
@@ -96,7 +95,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Name link'
                 )->addColumn(
-                    CmsMenuSchemaInterface::CMS_PAGE_URL,
+                    LinksSchemaInterface::CMS_PAGE_URL_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                     120,
                     [
@@ -104,7 +103,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'cms url'
                 )->addColumn(
-                    CmsMenuSchemaInterface::IS_ENABLED,
+                    LinksSchemaInterface::IS_ENABLED,
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                     11,
                     [
@@ -114,7 +113,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Is enabled'
                 )->addColumn(
-                    CmsMenuSchemaInterface::CREATED_AT_COL_NAME,
+                    LinksSchemaInterface::CREATED_AT_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
                     null,
                     ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT],
@@ -141,7 +140,7 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Link ID'
                 )->addColumn(
-                    LinksAndCmsPageSchemaInterface::CMS_PAGE_COL_NAME,
+                    LinksAndCmsPageSchemaInterface::PRIMARY_COL_NAME,
                     \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
                     null,
                     [

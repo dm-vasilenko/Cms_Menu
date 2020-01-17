@@ -6,18 +6,11 @@ use Magento\Backend\Block\Widget\Grid\Serializer;
 
 class Page extends \Magento\Backend\Block\Widget\Grid\Container
 {
-    /**
-     * Retrieve instance of grid block
-     *
-     * @return \Magento\Framework\View\Element\BlockInterface
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-
     public function _construct()
     {
         $this->_blockGroup = 'Web4Pro_Menu';
         $this->_controller = 'Adminhtml\Example\Edit\Page';
-        $this->_template = 'Web4Pro_Menu::cms_pages.phtml';
+        $this->_template = 'Web4Pro_Menu::view.phtml';
         parent::_construct();
     }
 
@@ -27,7 +20,7 @@ class Page extends \Magento\Backend\Block\Widget\Grid\Container
         $serialzeAr = [
             'data' => [
                 'grid_block' => $this->getChildBlock('grid'),
-                'callback' => 'getSelectedProducts',
+                'callback' => 'getSelectedPages',
                 'input_element_name' => 'cms_page',
                 'reload_param_name' => 'cms_page'
             ]
@@ -45,6 +38,6 @@ class Page extends \Magento\Backend\Block\Widget\Grid\Container
 
     public function getGridHtml()
     {
-        return $this->getChildHtml('grid');
+        return $this->getChildHtml('grid') . $this->getChildHtml('serializer');
     }
 }

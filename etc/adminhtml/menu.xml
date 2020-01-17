@@ -10,9 +10,9 @@
                 module="Web4Pro_Menu"
                 sortOrder="60"
                 dependsOnModule="Web4Pro_Menu"
-                resource="Web4Pro_Menu::cms_menu"
+                resource="Web4Pro_Menu::link"
                 parent="Magento_Backend::content_elements"
-                action="cms_menu/index/index"
+                action="link/index/index"
         />
     </menu>
 </config>

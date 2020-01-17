@@ -6,7 +6,7 @@
     <arguments>
         <argument name="collections" xsi:type="array">
             <item
-                    name="menu_grid_listing_data_source"
+                    name="link_grid_listing_data_source"
                     xsi:type="string"
             >Web4Pro\Menu\Model\ResourceModel\CmsMenu\Grid\Collection</item>
         </argument>

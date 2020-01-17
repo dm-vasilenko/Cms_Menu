@@ -45,7 +45,7 @@ class CmsPageActions extends Column
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'cms_menu/index/create',
+                        'link/index/create',
                         ['id' => $item['link_id']]
                     ),
                     'label' => __('Edit'),
@@ -53,7 +53,7 @@ class CmsPageActions extends Column
                     '__disableTmpl' => true
                 ];
                 $item[$this->getData('name')]['delete'] = [
-                    'href' => $this->urlBuilder->getUrl('cms_menu/index/delete', ['id' => $item['link_id']]),
+                    'href' => $this->urlBuilder->getUrl('link/index/delete', ['id' => $item['link_id']]),
                     'label' => __('Delete'),
                     'confirm' => [
                         'title' => __('Delete "${ $.$data.link_name }"'),

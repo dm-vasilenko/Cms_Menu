@@ -4,7 +4,6 @@ namespace Web4Pro\Menu\Model;
 
 use Magento\Framework\Model\AbstractModel;
 use Web4Pro\Menu\Model\ResourceModel\CmsMenu as ResourceModel;
-use Web4Pro\Menu\Api\Model\Schema\CmsMenuSchemaInterface;
 
 class CmsMenu extends AbstractModel
 {
