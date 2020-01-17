@@ -87,22 +87,6 @@ class InstallSchema implements InstallSchemaInterface
                     ],
                     'Link body'
                 )->addColumn(
-                    LinksSchemaInterface::CMS_PAGE_NAME_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    120,
-                    [
-                        'nullable' => false,
-                    ],
-                    'Name link'
-                )->addColumn(
-                    LinksSchemaInterface::CMS_PAGE_URL_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    120,
-                    [
-                        'nullable' => false,
-                    ],
-                    'cms url'
-                )->addColumn(
                     LinksSchemaInterface::IS_ENABLED,
                     \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
                     11,

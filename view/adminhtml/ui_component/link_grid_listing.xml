@@ -113,22 +113,6 @@
                 </item>
             </argument>
         </column>
-        <column name="cms_page_link">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Cms Page Name</item>
-                </item>
-            </argument>
-        </column>
-        <column name="cms_page_url">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Cms Page URL</item>
-                </item>
-            </argument>
-        </column>
         <column name="is_enabled">
             <argument name="data" xsi:type="array">
                 <item name="options" xsi:type="object">Web4Pro\Menu\UI\Component\CmsPageEnabledSelect</item>
