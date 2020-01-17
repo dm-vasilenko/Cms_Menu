@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">link_form.link_form_data_source</item>
+            <item name="deps" xsi:type="string">link_form.link_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Link Form</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">link_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Web4Pro\Menu\Block\Adminhtml\BackButton"/>
+            <button name="reset" class="Web4Pro\Menu\Block\Adminhtml\ResetButton"/>
+            <button name="save" class="Web4Pro\Menu\Block\Adminhtml\SaveLink"/>
+        </buttons>
+        <namespace>link_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>link_form.link_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="link_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Web4Pro\Menu\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">link_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">link_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Web4Pro_Menu/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="cms_menu/index/save" />
+        </settings>
+    </dataSource>
+
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="collapsible" xsi:type="boolean">true</item>
+                <item name="label" xsi:type="string" translate="true">General</item>
+                <item name="sortOrder" xsi:type="number">20</item>
+                <item name="opened" xsi:type="boolean">true</item>
+            </item>
+        </argument>
+
+        <field name="link_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Link Name</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">link</item>
+                    <item name="require" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">link_name</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="link_body">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Link Body</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">link</item>
+                    <item name="require" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">link_body</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+
+        <field name="cms_page_link">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Web4Pro\Menu\UI\Component\CmsPageSelect</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Cms Pages</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">link</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="dataScope" xsi:type="string">cms_page_link</item>
+                </item>
+            </argument>
+        </field>
+
+        <field name="is_enabled" formElement="select">
+            <settings>
+                <dataType>int</dataType>
+                <label translate="true">Is enabled</label>
+                <dataScope>is_enabled</dataScope>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options>
+                            <option name="1" xsi:type="array">
+                                <item name="value" xsi:type="string">1</item>
+                                <item name="label" xsi:type="string">Yes</item>
+                            </option>
+                            <option name="0" xsi:type="array">
+                                <item name="value" xsi:type="string">0</item>
+                                <item name="label" xsi:type="string">No</item>
+                            </option>
+                        </options>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+
+    <fieldset name="assign_products" sortOrder="40">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Cms Pages</label>
+            <additionalClasses>
+                <class name="product-video-grid">true</class>
+            </additionalClasses>
+        </settings>
+        <container name="my_container" sortOrder="160">
+            <htmlContent name="html_content">
+                <block name="cms.menu.container" class="Web4Pro\Menu\Block\Adminhtml\Example\Edit\Page"/>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

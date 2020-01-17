@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+                id="Web4Pro_Menu::Grid"
+                title="Links"
+                translate="title"
+                module="Web4Pro_Menu"
+                sortOrder="60"
+                dependsOnModule="Web4Pro_Menu"
+                resource="Web4Pro_Menu::cms_menu"
+                parent="Magento_Backend::content_elements"
+                action="cms_menu/index/index"
+        />
+    </menu>
+</config>
