@@ -2,7 +2,9 @@
 /** @var \Web4Pro\Menu\Block\ContentLink $block */
 $collection = $block->getLink();
 foreach ($collection as $item):?>
-<a href="<?=$item->getlink_body()?>"><?= $item->getlink_name() ?></a>
+<div>
+    <a href="<?=$item->getlink_body()?>"><?= $item->getlink_name() ?></a>
+</div>
 <?php endforeach;?>
 
 

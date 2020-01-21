@@ -4,6 +4,7 @@ namespace Web4Pro\Menu\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Web4Pro\Menu\Api\Model\Schema\LinksSchemaInterface;
+use Magento\Framework\Model\AbstractModel;
 
 class CmsMenu extends AbstractDb
 {
@@ -16,7 +17,7 @@ class CmsMenu extends AbstractDb
         $this->_init(LinksSchemaInterface::TABLE_NAME, LinksSchemaInterface::LINK_ID_COL_NAME);
     }
 
-    protected function _afterSave(\Magento\Framework\Model\AbstractModel $object)
+    protected function _afterSave(AbstractModel $object)
     {
         $table = $this->getConnection()->getTableName('web4pro_links_and_cms_page');
         $pages = $object['selected_pages'];

@@ -3,8 +3,9 @@
 namespace Web4Pro\Menu\Block\Adminhtml\Example\Edit;
 
 use Magento\Backend\Block\Widget\Grid\Serializer;
+use Magento\Backend\Block\Widget\Grid\Container;
 
-class Page extends \Magento\Backend\Block\Widget\Grid\Container
+class Page extends Container
 {
 
     public function _construct()

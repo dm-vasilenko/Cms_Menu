@@ -5,6 +5,7 @@ namespace Web4Pro\Menu\Setup;
 use Magento\Framework\Setup\InstallSchemaInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\SchemaSetupInterface;
+use Magento\Framework\DB\Ddl\Table;
 
 use Web4Pro\Menu\Api\Model\Schema\LinksSchemaInterface;
 use Web4Pro\Menu\Api\Model\Schema\LinksAndCmsPageSchemaInterface;
@@ -35,7 +36,7 @@ class InstallSchema implements InstallSchemaInterface
             LinksAndCmsPageSchemaInterface::PRIMARY_COL_NAME,
             $setup->getTable(LinksAndCmsPageSchemaInterface::CMS_PAGE_TABLE_NAME),
             LinksAndCmsPageSchemaInterface::CMS_PAGE_ORIG_COL_NAME,
-            \Magento\Framework\DB\Ddl\Table::ACTION_NO_ACTION
+            Table::ACTION_NO_ACTION
         );
         $setup->getConnection()->addForeignKey(
             $setup->getFkName(
@@ -48,7 +49,7 @@ class InstallSchema implements InstallSchemaInterface
             LinksAndCmsPageSchemaInterface::LINK_ID_COL_NAME,
             $setup->getTable(LinksSchemaInterface::TABLE_NAME),
             LinksSchemaInterface::LINK_ID_COL_NAME,
-            \Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+            Table::ACTION_CASCADE
         );
         $installer->endSetup();
     }
@@ -61,7 +62,7 @@ class InstallSchema implements InstallSchemaInterface
             )
                 ->addColumn(
                     LinksSchemaInterface::LINK_ID_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    Table::TYPE_INTEGER,
                     null,
                     [
                         'identity' => true,
@@ -72,7 +73,7 @@ class InstallSchema implements InstallSchemaInterface
                     'Link ID'
                 )->addColumn(
                     LinksSchemaInterface::LINK_NAME_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    Table::TYPE_TEXT,
                     32,
                     [
                         'nullable' => false,
@@ -80,7 +81,7 @@ class InstallSchema implements InstallSchemaInterface
                     'Link name'
                 )->addColumn(
                     LinksSchemaInterface::LINK_BODY_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    Table::TYPE_TEXT,
                     32,
                     [
                         'nullable' => false,
@@ -88,7 +89,7 @@ class InstallSchema implements InstallSchemaInterface
                     'Link body'
                 )->addColumn(
                     LinksSchemaInterface::IS_ENABLED,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    Table::TYPE_INTEGER,
                     11,
                     [
                         'nullable' => false,
@@ -98,9 +99,9 @@ class InstallSchema implements InstallSchemaInterface
                     'Is enabled'
                 )->addColumn(
                     LinksSchemaInterface::CREATED_AT_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+                    Table::TYPE_TIMESTAMP,
                     null,
-                    ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT],
+                    ['nullable' => false, 'default' => Table::TIMESTAMP_INIT],
                     'Date of Create'
                 )->setComment('Reference table');
             $installer->getConnection()->createTable($table);
@@ -115,7 +116,7 @@ class InstallSchema implements InstallSchemaInterface
             )
                 ->addColumn(
                     LinksAndCmsPageSchemaInterface::LINK_ID_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+                    Table::TYPE_INTEGER,
                     null,
                     [
                         'nullable' => false,
@@ -125,7 +126,7 @@ class InstallSchema implements InstallSchemaInterface
                     'Link ID'
                 )->addColumn(
                     LinksAndCmsPageSchemaInterface::PRIMARY_COL_NAME,
-                    \Magento\Framework\DB\Ddl\Table::TYPE_SMALLINT,
+                    Table::TYPE_SMALLINT,
                     null,
                     [
                         'nullable' => false,

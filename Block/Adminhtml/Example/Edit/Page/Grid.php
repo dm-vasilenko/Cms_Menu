@@ -2,9 +2,14 @@
 
 namespace Web4Pro\Menu\Block\Adminhtml\Example\Edit\Page;
 
+use Magento\Backend\Block\Template\Context;
+use Magento\Backend\Block\Widget\Grid\Extended;
+use Magento\Backend\Helper\Data;
+use Magento\Cms\Model\PageFactory;
 use Magento\Framework\Registry;
+use Web4Pro\Menu\Model\CmsMenuFactory;
 
-class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
+class Grid extends Extended
 {
     protected $coreRegistry = null;
 
@@ -13,10 +18,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $linkFactory;
 
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
-        \Magento\Backend\Helper\Data $backendHelper,
-        \Magento\Cms\Model\PageFactory $pageFactory,
-        \Web4Pro\Menu\Model\CmsMenuFactory $linkFactory,
+        Context $context,
+        Data $backendHelper,
+        PageFactory $pageFactory,
+        CmsMenuFactory $linkFactory,
         Registry $coreRegistry,
         array $data = []
     ) {
