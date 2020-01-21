@@ -8,6 +8,8 @@ use Web4Pro\Menu\Model\CmsMenu as Model;
 
 class Collection extends AbstractCollection
 {
+    protected $_idFieldName = 'link_id';
+
     public function _construct()
     {
         $this->_init(Model::class, ResourceModel::class);

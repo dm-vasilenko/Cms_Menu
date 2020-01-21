@@ -159,7 +159,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         );
     }
 
-    protected function getSelectedPages()
+    public function getSelectedPages()
     {
         if ($this->getRequest()->getParam('id') == null) {
             return null;

@@ -91,44 +91,23 @@
             </settings>
         </field>
 
-        <field name="cms_page_link">
+        <field name="is_enabled">
             <argument name="data" xsi:type="array">
-                <item name="options" xsi:type="object">Web4Pro\Menu\UI\Component\CmsPageSelect</item>
+                <item name="options" xsi:type="object">Web4Pro\Menu\UI\Component\CmsPageEnabledSelect</item>
                 <item name="config" xsi:type="array">
                     <item name="dataType" xsi:type="string">text</item>
-                    <item name="visible" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Cms Pages</item>
+                    <item name="label" xsi:type="string" translate="true">Is enabled</item>
                     <item name="formElement" xsi:type="string">select</item>
                     <item name="source" xsi:type="string">link</item>
-                    <item name="sortOrder" xsi:type="number">5</item>
-                    <item name="dataScope" xsi:type="string">cms_page_link</item>
+                    <item name="dataScope" xsi:type="string">is_enabled</item>
+                    <item name="default" xsi:type="string">0</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
                 </item>
             </argument>
         </field>
 
-        <field name="is_enabled" formElement="select">
-            <settings>
-                <dataType>int</dataType>
-                <label translate="true">Is enabled</label>
-                <dataScope>is_enabled</dataScope>
-            </settings>
-            <formElements>
-                <select>
-                    <settings>
-                        <options>
-                            <option name="1" xsi:type="array">
-                                <item name="value" xsi:type="string">1</item>
-                                <item name="label" xsi:type="string">Yes</item>
-                            </option>
-                            <option name="0" xsi:type="array">
-                                <item name="value" xsi:type="string">0</item>
-                                <item name="label" xsi:type="string">No</item>
-                            </option>
-                        </options>
-                    </settings>
-                </select>
-            </formElements>
-        </field>
     </fieldset>
 
     <fieldset name="page_grid" sortOrder="40">
