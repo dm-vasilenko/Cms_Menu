@@ -6,6 +6,7 @@ use Magento\Backend\Block\Widget\Grid\Serializer;
 
 class Page extends \Magento\Backend\Block\Widget\Grid\Container
 {
+
     public function _construct()
     {
         $this->_blockGroup = 'Web4Pro_Menu';
@@ -33,8 +34,8 @@ class Page extends \Magento\Backend\Block\Widget\Grid\Container
 
     public function _addNewButton()
     {
-
     }
+
 
     public function getGridHtml()
     {

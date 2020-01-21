@@ -25,8 +25,8 @@ class Grid extends Action
         $resultRaw = $this->resultRawFactory->create();
         return $resultRaw->setContents(
             $this->layoutFactory->create()->createBlock(
-                \Web4pro\Menu\Block\Adminhtml\Example\Edit\Page\Grid::class,
-                'pages_grid'
+                \Web4Pro\Menu\Block\Adminhtml\Example\Edit\Page\Grid::class,
+                'link.pages.grid'
             )->toHtml()
         );
     }

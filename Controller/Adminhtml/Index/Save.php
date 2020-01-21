@@ -4,6 +4,7 @@ namespace Web4Pro\Menu\Controller\Adminhtml\Index;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Cms\Model\PageFactory as CmsPageFactory;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\PageFactory;
 use Psr\Log\LoggerInterface;
 use Web4Pro\Menu\Controller\Adminhtml\CmsMenu;
@@ -14,39 +15,46 @@ class Save extends CmsMenu
 {
     protected $cmsPageFactory;
 
+    protected $resultRedirect;
+
+
     public function __construct(
         Context $context,
         PageFactory $pageFactory,
         CmsMenuFactory $model,
         Collection $collection,
         LoggerInterface $logger,
-        CmsPageFactory $cmsPageFactory
+        CmsPageFactory $cmsPageFactory,
+        ResultFactory $result
     ) {
         parent::__construct($context, $pageFactory, $model, $collection, $logger);
+        $this->resultRedirect = $result;
         $this->cmsPageFactory = $cmsPageFactory;
     }
 
     public function execute()
     {
         $data = $this->getRequest()->getParams();
-        $data['selected_pages'] = explode('&', $data['selected_pages']);
-        $data['cms_page_url'] =  $this->cmsPageFactory->create()->load($data['cms_page_link'])->getIdentifier();
+        if (!empty($data['selected_pages'])) {
+            $data['selected_pages'] = explode('&', $data['selected_pages']);
+        }
         $model = $this->modelFactory->create();
 
         $model->setData($data);
         try {
-            if (empty($data['link_id'])) {
-                $model->save();
-                $model->getResource()->afterSave($model);
-            } else {
-                $model->save();
-                $model->getResource()->afterEditSave($model);
+            if (empty($data['selected_pages'])) {
+                throw new \Exception('You must definitely select at least one page');
             }
+            $model->save();
+
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
-            $this->messageManager->addErrorMessage('Link not saved');
-            $this->redirectToGrid();
+            $this->messageManager->addErrorMessage('Unfortunately the link was not saved');
+
+            $resultRedirect = $this->resultRedirect->create(ResultFactory::TYPE_REDIRECT);
+            $resultRedirect->setUrl($this->_redirect->getRefererUrl());
+            return $resultRedirect;
         }
-        $this->redirectToGrid();
+        return $this->redirectToGrid();
     }
 }

@@ -136,7 +136,7 @@
             <collapsible>true</collapsible>
             <label translate="true">Cms Pages</label>
             <additionalClasses>
-                <class name="pages">true</class>
+                <class name="grid_container">true</class>
             </additionalClasses>
         </settings>
         <container name="grid_container" sortOrder="160">

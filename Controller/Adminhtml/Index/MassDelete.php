@@ -14,13 +14,14 @@ class MassDelete extends CmsMenu
             foreach ($ids as $id) {
                 try {
                     $model = $this->modelFactory->create();
-                    $this->resourceModel->load($model, $id);
+                    $model->load($id);
+                    $model->delete();
                 } catch (\Exception $e) {
                     $this->logger->error($e->getMessage());
                     $this->logger->critical(
-                        sprintf("Can\'t delete order: %d", $id)
+                        sprintf("Can\'t delete link: %d", $id)
                     );
-                    $this->messageManager->addErrorMessage(__('Order with id %1 not deleted', $id));
+                    $this->messageManager->addErrorMessage(__('Link with id %1 not deleted', $id));
                 }
             }
             $this->messageManager->addSuccessMessage(

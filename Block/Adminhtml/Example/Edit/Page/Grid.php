@@ -10,13 +10,17 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 
     protected $pageFactory;
 
+    protected $linkFactory;
+
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Backend\Helper\Data $backendHelper,
         \Magento\Cms\Model\PageFactory $pageFactory,
+        \Web4Pro\Menu\Model\CmsMenuFactory $linkFactory,
         Registry $coreRegistry,
         array $data = []
     ) {
+        $this->linkFactory = $linkFactory;
         $this->pageFactory = $pageFactory;
         $this->coreRegistry = $coreRegistry;
         parent::__construct($context, $backendHelper, $data);
@@ -34,7 +38,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected function _addColumnFilterToCollection($column)
     {
         if ($column->getId() == 'page_id') {
-            $pageIds = $this->_getSelectedPages();
+            $pageIds = $this->getSelectedPages();
             if (empty($pageIds)) {
                 $pageIds = 0;
             }
@@ -69,7 +73,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'editable'     => true,
                 'edit_only'    => false,
                 'html_name' => 'page_id',
-                'values' => $this->_getSelectedPages(),
+                'values' => $this->getSelectedPages(),
                 'align' => 'center',
                 'index' => 'page_id',
                 'field_name' =>'selected_pages',
@@ -83,6 +87,18 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
             [
                 'header' => __('Title'),
                 'index' => 'title',
+                'sortable' => true,
+                'header_css_class' => 'col-title',
+                'column_css_class' => 'col-title'
+            ]
+        );
+
+        $this->addColumn(
+            'page_layout',
+            [
+                'header' => __('Page layout'),
+                'index' => 'page_layout',
+                'sortable' => true,
                 'header_css_class' => 'col-title',
                 'column_css_class' => 'col-title'
             ]
@@ -91,8 +107,42 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         $this->addColumn(
             'identifier',
             [
-                'header' => __('identifier'),
+                'header' => __('Identifier'),
                 'index' => 'identifier',
+                'sortable' => true,
+                'header_css_class' => 'col-identifier',
+                'column_css_class' => 'col-identifier'
+            ]
+        );
+
+        $this->addColumn(
+            'creation_time',
+            [
+                'header' => __('Creation time'),
+                'index' => 'creation_time',
+                'sortable' => true,
+                'header_css_class' => 'col-identifier',
+                'column_css_class' => 'col-identifier'
+            ]
+        );
+
+        $this->addColumn(
+            'update_time',
+            [
+                'header' => __('Update time'),
+                'index' => 'update_time',
+                'sortable' => true,
+                'header_css_class' => 'col-identifier',
+                'column_css_class' => 'col-identifier'
+            ]
+        );
+
+        $this->addColumn(
+            'is_active',
+            [
+                'header' => __('is active'),
+                'index' => 'is_active',
+                'sortable' => true,
                 'header_css_class' => 'col-identifier',
                 'column_css_class' => 'col-identifier'
             ]
@@ -104,15 +154,22 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     public function getGridUrl()
     {
         return $this->getUrl(
-            'link/index/grid',
+            '*/*/grid',
             ['_current' => true]
         );
     }
 
-    protected function _getSelectedPages()
+    protected function getSelectedPages()
     {
-        $data = $this->getRequest()->getPost('selected_pages');
-        return  $data;
+        if ($this->getRequest()->getParam('id') == null) {
+            return null;
+        } else {
+            return $this->getPagesCollection();
+        }
     }
 
+    protected function getPagesCollection()
+    {
+        return $this->linkFactory->create()->getResource()->getCheckedPages($this->getRequest()->getParam('id'));
+    }
 }
