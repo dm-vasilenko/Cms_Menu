@@ -7,4 +7,5 @@ use Web4Pro\Menu\Controller\Adminhtml\CmsMenu;
 
 class Index extends CmsMenu
 {
+    const PAGE_TITLE = 'Links table';
 }

@@ -7,7 +7,9 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 use Psr\Log\LoggerInterface;
 use Web4Pro\Menu\Model\CmsMenuFactory;
-use Web4Pro\Menu\Model\ResourceModel\CmsMenu\Collection;
+use Web4Pro\Menu\Model\ResourceModel\CmsMenu\CollectionFactory;
+use Magento\Ui\Component\MassAction\Filter;
+
 
 abstract class CmsMenu extends Action
 {
@@ -16,9 +18,11 @@ abstract class CmsMenu extends Action
 
     protected $pageFactory;
 
+    protected $filter;
+
     protected $modelFactory;
 
-    protected $collection;
+    protected $collectionFactory;
 
     protected $logger;
 
@@ -26,13 +30,15 @@ abstract class CmsMenu extends Action
         Context $context,
         PageFactory $pageFactory,
         CmsMenuFactory $model,
-        Collection $collection,
-        LoggerInterface $logger
+        CollectionFactory $collectionFactory,
+        LoggerInterface $logger,
+        Filter $filter
     ) {
         $this->pageFactory = $pageFactory;
         $this->modelFactory = $model;
-        $this->collection = $collection;
+        $this->collectionFactory = $collectionFactory;
         $this->logger = $logger;
+        $this->filter = $filter;
         parent::__construct($context);
     }
 

@@ -2,21 +2,28 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
     <arguments>
         <argument name="collections" xsi:type="array">
             <item
                     name="link_grid_listing_data_source"
                     xsi:type="string"
-            >Web4Pro\Menu\Model\ResourceModel\CmsMenu\Grid\Collection</item>
+            >myGridCollection</item>
         </argument>
     </arguments>
 
     <arguments>
         <argument name="collections" xsi:type="array">
             <item name="link_form_data_source" xsi:type="string">
-                Web4Pro\Menu\Model\ResourceModel\CmsMenu\Grid\Collection</item>
+                myGridCollection</item>
         </argument>
     </arguments>
     </type>
+    
+    <virtualType name="myGridCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="resourceModel" xsi:type="string">Web4Pro\Menu\Model\ResourceModel\CmsMenu</argument>
+        </arguments>
+    </virtualType>
 </config>

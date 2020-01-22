@@ -26,9 +26,12 @@ class ContentLink extends Template
         $linkCollection = $this->linkCollectionFactory->create();
         $joinTable = LinksAndCmsPageSchemaInterface::TABLE_NAME;
         $linkCollection
-            ->join($joinTable, "main_table.link_id = $joinTable.link_id", 'cms_page_id')
             ->addFieldToFilter('cms_page_id', $pageId)
             ->addFieldToFilter('is_enabled', 1);
+
+        $linkCollection
+            ->join($joinTable, "main_table.link_id = $joinTable.link_id", ['cms_page_id']);
+
         return $linkCollection;
     }
 }

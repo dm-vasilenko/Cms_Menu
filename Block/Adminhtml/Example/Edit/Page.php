@@ -12,7 +12,6 @@ class Page extends Container
     {
         $this->_blockGroup = 'Web4Pro_Menu';
         $this->_controller = 'Adminhtml\Example\Edit\Page';
-        $this->_template = 'Web4Pro_Menu::view.phtml';
         parent::_construct();
     }
 
